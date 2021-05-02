@@ -1,11 +1,15 @@
 package com.example.catimages.models
 
-data class PagedCats (
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-    val breeds : List<String>,
-    val categories : List<Categories>,
-    val id : Int,
+
+@Parcelize
+data class PagedCat (
+    val id : String,
     val url : String,
+    val breeds : List<Breed>? = null,
+    val categories : List<Categories>? = null,
     val width : Int,
     val height : Int
-)
+): Parcelable
