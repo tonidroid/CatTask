@@ -8,11 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.catimages.models.PagedCat
 import com.example.catimages.models.ResponseStatus
 import com.example.catimages.network.CatApi
+import com.example.catimages.repositories.CatRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ImagesViewModel : ViewModel() {
+
+    private val catRepo: CatRepositoryImpl = CatRepositoryImpl()
 
     private val _status = MutableLiveData<ResponseStatus>()
 
@@ -23,16 +26,16 @@ class ImagesViewModel : ViewModel() {
     val catList: LiveData<List<PagedCat>>
         get() = _cat
 
-    init {
-        getPagedCats(9,1)
-    }
+//    init {
+//        getPagedCats(9,1)
+//    }
 
-    private fun getPagedCats(limit: Int, page: Int) {
+    fun getPagedCats(limit: Int, page: Int) {
         viewModelScope.launch {
             _status.value = ResponseStatus.LOADING
             try {
                 withContext(Dispatchers.Main){
-                    _cat.value = CatApi.retrofitService.getPagedCats("asc",18,3)
+                    _cat.value = catRepo.getPagedCats("asc",limit, page)
                     _status.value = ResponseStatus.DONE
                 }
             } catch (e: Exception) {

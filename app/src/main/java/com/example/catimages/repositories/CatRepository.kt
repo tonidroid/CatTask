@@ -3,5 +3,5 @@ package com.example.catimages.repositories
 import com.example.catimages.models.PagedCat
 
 interface CatRepository {
-    suspend fun getPagedCats() : List<PagedCat>
+    suspend fun getPagedCats(order: String, limit: Int, page: Int) : List<PagedCat>
 }

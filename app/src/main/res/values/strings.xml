@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">CatImages</string>
     <string name="search">Search</string>
+
+
+    <string-array name="image_count">
+        <item>3</item>
+        <item>9</item>
+        <item>18</item>
+        <item>27</item>
+    </string-array>
 </resources>

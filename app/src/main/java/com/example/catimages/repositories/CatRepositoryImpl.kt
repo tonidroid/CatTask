@@ -6,9 +6,8 @@ import com.example.catimages.network.CatApi
 
 class CatRepositoryImpl : CatRepository {
 
-    override suspend fun getPagedCats(): List<PagedCat> {
+    override suspend fun getPagedCats(order: String, limit: Int, page: Int): List<PagedCat> {
         return CatApi.retrofitService.getPagedCats(
-            "asc",4,0
-                )
+            "asc",limit, page)
     }
 }

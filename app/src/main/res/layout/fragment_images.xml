@@ -22,17 +22,19 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toTopOf="@+id/btnSerach"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintVertical_bias="0.0"
                 app:listData="@{viewModel.catList}"
                 app:spanCount="3"
                 tools:itemCount="9"
                 tools:listitem="@layout/grid_item_cat" />
 
-        <Spinner
+            <Spinner
             android:id="@+id/sImageCount"
             android:layout_width="151dp"
             android:layout_height="42dp"
@@ -54,5 +56,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/sImageCount" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/ivLoading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@+id/recCats"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:responseStatus="@{viewModel.status}"
+                app:srcCompat="@drawable/loading_animation" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

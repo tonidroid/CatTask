@@ -31,7 +31,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .load(imgUri)
             .apply(
                 RequestOptions()
-                .placeholder(R.drawable.ic_loading_24)
+                .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.ic_discon_24))
             .into(imgView)
     }
@@ -43,11 +43,11 @@ fun bindStatus(statusImageView: ImageView, status: ResponseStatus?) {
     when (status) {
         ResponseStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_loading_24)
+            statusImageView.setImageResource(R.drawable.loading_animation)
         }
         ResponseStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_discon_24)
+            statusImageView.setImageResource(R.drawable.loading_animation)
         }
         ResponseStatus.DONE -> {
             statusImageView.visibility = View.GONE
