@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/ivCat"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
             android:scaleType="centerCrop"
             app:imageUrl="@{viewModel.selectedCat.url}"
             app:layout_constraintBottom_toBottomOf="parent"

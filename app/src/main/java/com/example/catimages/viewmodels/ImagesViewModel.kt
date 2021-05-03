@@ -28,5 +28,4 @@ class ImagesViewModel : BaseViewModel() {
         .setPageSize(4*2)
         .build()
 
-
 }
