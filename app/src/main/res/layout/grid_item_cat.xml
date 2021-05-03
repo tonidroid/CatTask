@@ -21,6 +21,6 @@
         android:adjustViewBounds="true"
         android:padding="4dp"
         app:imageUrl="@{cat.url}"
-        app:responseStatus="@{viemodel.status}"
+        app:responseStatus="@{viemodel.responseState}"
         tools:src="@tools:sample/backgrounds/scenic"/>
 </layout>

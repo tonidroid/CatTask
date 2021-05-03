@@ -2,19 +2,16 @@ package com.example.catimages.ui.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.catimages.R
 import com.example.catimages.databinding.FragmentImagesBinding
 import com.example.catimages.ui.adapters.ImageGridAdapter
 import com.example.catimages.viewmodels.ImagesViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 class ImagesFragment : Fragment() {
@@ -23,36 +20,34 @@ class ImagesFragment : Fragment() {
         ViewModelProvider(this).get(ImagesViewModel::class.java)
     }
 
+    private lateinit var bind: FragmentImagesBinding
+
+    private lateinit var adapter: ImageGridAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val bind = FragmentImagesBinding.inflate(inflater)
-
+        bind = FragmentImagesBinding.inflate(inflater)
         bind.lifecycleOwner = this
         bind.viewModel = viewModel
 
-
-        val spinner = bind.sImageCount
-        ArrayAdapter.createFromResource(
-                requireContext(), R.array.image_count, android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                spinner.adapter = adapter
-            }
-
-
-        bind.btnSerach.setOnClickListener {
-            viewModel.getPagedCats(spinner.selectedItem.toString().toInt(),0)
-        }
-
-        bind.recCats.adapter = ImageGridAdapter(ImageGridAdapter.OnClickListener { cat ->
-            findNavController()
-                .navigate(ImagesFragmentDirections.actionImagesFragmentToDetailFragment(cat))
-        })
+        configRecycler()
 
 
         return bind.root
+    }
+
+
+    private fun configRecycler() {
+        adapter = ImageGridAdapter(ImageGridAdapter.OnClickListener { cat ->
+            findNavController()
+                .navigate(ImagesFragmentDirections.actionImagesFragmentToDetailFragment(cat))
+        })
+        bind.recCats.adapter = adapter
+        viewModel.cats.observe(viewLifecycleOwner, { adapter.submitList(it) })
+
+
     }
 
 }

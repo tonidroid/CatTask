@@ -29,32 +29,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:listData="@{viewModel.catList}"
-                app:spanCount="3"
+                app:spanCount="2"
                 tools:itemCount="9"
                 tools:listitem="@layout/grid_item_cat" />
 
-            <Spinner
-                android:id="@+id/sImageCount"
-                android:layout_width="151dp"
-                android:layout_height="42dp"
-                app:layout_constraintEnd_toStartOf="@+id/btnSerach"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
             <Button
-            android:id="@+id/btnSerach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@string/search"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            app:icon = "@drawable/ic_search_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/sImageCount" />
+                android:id="@+id/btnSerach"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:text="@string/search"
+                app:icon="@drawable/ic_search_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/ivLoading"
@@ -65,18 +54,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:responseStatus="@{viewModel.status}"
-                app:srcCompat="@drawable/loading_animation" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/images_per_page"
-                android:textColor="@color/purple_700"
-                app:layout_constraintEnd_toEndOf="@+id/sImageCount"
-                app:layout_constraintStart_toStartOf="@+id/sImageCount"
-                app:layout_constraintTop_toBottomOf="@+id/recCats" />
+                app:responseStatus="@{viewModel.responseState}"
+                tools:srcCompat="@drawable/loading_img" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
