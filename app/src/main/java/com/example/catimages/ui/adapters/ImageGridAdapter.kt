@@ -2,24 +2,20 @@ package com.example.catimages.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catimages.databinding.GridItemCatBinding
 import com.example.catimages.models.Cat
 
 class ImageGridAdapter(private val onClickListener: OnClickListener ) :
-    ListAdapter<Cat, ImageGridAdapter.CatViewHolder>(DiffCallback) {
+    PagedListAdapter<Cat, ImageGridAdapter.CatViewHolder>(diffCallback) {
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Cat>() {
-
-        override fun areItemsTheSame(oldItem: Cat, newItem: Cat): Boolean {
-            return oldItem === newItem
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<Cat>() {
+            override fun areItemsTheSame(oldItem: Cat, newItem: Cat) = oldItem === newItem
+            override fun areContentsTheSame(oldItem: Cat, newItem: Cat) = oldItem.id == newItem.id
         }
-        override fun areContentsTheSame(oldItem: Cat, newItem: Cat): Boolean {
-            return oldItem.id == newItem.id
-        }
-
     }
 
     class CatViewHolder(private var binding: GridItemCatBinding):
@@ -39,9 +35,13 @@ class ImageGridAdapter(private val onClickListener: OnClickListener ) :
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
         val cat = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(cat)
+            if (cat != null) {
+                onClickListener.onClick(cat)
+            }
         }
-        holder.bind(cat)
+        if (cat != null) {
+            holder.bind(cat)
+        }
     }
 
 

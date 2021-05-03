@@ -20,7 +20,7 @@ private const val BASE_URL = "https://api.thecatapi.com/v1/"
 private val loggingInterceptor = HttpLoggingInterceptor()
 private val client = OkHttpClient.Builder()
     .addInterceptor(loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY))
-    .callTimeout(10, TimeUnit.SECONDS)
+    .callTimeout(20, TimeUnit.SECONDS)
     .build()
 
 private val moshi = Moshi.Builder()

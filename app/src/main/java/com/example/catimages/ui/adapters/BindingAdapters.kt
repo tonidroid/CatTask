@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import androidx.databinding.BindingAdapter
+import androidx.paging.PagedList
 import com.example.catimages.R
 import com.example.catimages.models.Cat
 import com.example.catimages.models.ResponseStatus
@@ -15,7 +16,7 @@ import com.example.catimages.models.ResponseStatus
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Cat>?) {
     val adapter = recyclerView.adapter as ImageGridAdapter
-    adapter.submitList(data)
+    adapter.submitList(data as PagedList<Cat>?)
 }
 
 

@@ -22,7 +22,6 @@ class CatDataSource (repository: CatRepositoryImpl, corScope: CoroutineScope)
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Cat>) { }
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Cat>) {
-        Log.d("getJobErrorHandler", "load after")
         executeQuery(1, params.requestedLoadSize) {
             callback.onResult(it, null, 2)
         }

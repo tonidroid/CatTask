@@ -45,17 +45,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:id="@+id/ivLoading"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="@+id/recCats"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:responseStatus="@{viewModel.responseState}"
-                tools:srcCompat="@drawable/loading_img" />
+<!--            <ImageView-->
+<!--                android:id="@+id/ivLoading"-->
+<!--                android:layout_width="150dp"-->
+<!--                android:layout_height="150dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/recCats"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:responseStatus="@{viewModel.responseState}"-->
+<!--                tools:srcCompat="@drawable/loading_img" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
