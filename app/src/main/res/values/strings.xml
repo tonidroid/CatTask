@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CatImages</string>
     <string name="search">Search</string>
+    <string name="images_per_page">Per page</string>
 
 
     <string-array name="image_count">
@@ -9,4 +10,9 @@
         <item>18</item>
         <item>27</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty">-</string>
+    <string name="id">Id:</string>
+    <string name="category">Category:</string>
 </resources>

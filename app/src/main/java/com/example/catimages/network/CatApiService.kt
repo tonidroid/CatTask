@@ -1,7 +1,7 @@
 package com.example.catimages.network
 
 
-import com.example.catimages.models.PagedCat
+import com.example.catimages.models.Cat
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -37,7 +37,7 @@ interface CatApiService {
         @Query("order") order: String,
         @Query("limit") limit: Int,
         @Query("page") page: Int
-    ): List<PagedCat>
+    ): List<Cat>
 }
 
 object CatApi {

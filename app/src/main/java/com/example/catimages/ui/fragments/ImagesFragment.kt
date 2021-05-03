@@ -7,10 +7,14 @@ import android.widget.ArrayAdapter
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.catimages.R
 import com.example.catimages.databinding.FragmentImagesBinding
 import com.example.catimages.ui.adapters.ImageGridAdapter
 import com.example.catimages.viewmodels.ImagesViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class ImagesFragment : Fragment() {
@@ -31,20 +35,20 @@ class ImagesFragment : Fragment() {
 
         val spinner = bind.sImageCount
         ArrayAdapter.createFromResource(
-                requireContext(),
-                    R.array.image_count,
-                android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
-        }
+                requireContext(), R.array.image_count, android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+            }
+
 
         bind.btnSerach.setOnClickListener {
-            viewModel.getPagedCats(spinner.selectedItem.toString().toInt(),2)
+            viewModel.getPagedCats(spinner.selectedItem.toString().toInt(),0)
         }
 
-        bind.recCats.adapter = ImageGridAdapter(ImageGridAdapter.OnClickListener {
-//            viewModel.displayPropertyDetails(it)
+        bind.recCats.adapter = ImageGridAdapter(ImageGridAdapter.OnClickListener { cat ->
+            findNavController()
+                .navigate(ImagesFragmentDirections.actionImagesFragmentToDetailFragment(cat))
         })
 
 

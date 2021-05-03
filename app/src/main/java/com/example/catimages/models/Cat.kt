@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class PagedCat (
+data class Cat (
     val id : String,
     val url : String,
     val breeds : List<Breed>? = null,

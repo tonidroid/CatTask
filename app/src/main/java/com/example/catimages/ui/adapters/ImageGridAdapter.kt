@@ -6,17 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catimages.databinding.GridItemCatBinding
-import com.example.catimages.models.PagedCat
+import com.example.catimages.models.Cat
 
 class ImageGridAdapter(private val onClickListener: OnClickListener ) :
-    ListAdapter<PagedCat, ImageGridAdapter.CatViewHolder>(DiffCallback) {
+    ListAdapter<Cat, ImageGridAdapter.CatViewHolder>(DiffCallback) {
 
-    companion object DiffCallback : DiffUtil.ItemCallback<PagedCat>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<Cat>() {
 
-        override fun areItemsTheSame(oldItem: PagedCat, newItem: PagedCat): Boolean {
+        override fun areItemsTheSame(oldItem: Cat, newItem: Cat): Boolean {
             return oldItem === newItem
         }
-        override fun areContentsTheSame(oldItem: PagedCat, newItem: PagedCat): Boolean {
+        override fun areContentsTheSame(oldItem: Cat, newItem: Cat): Boolean {
             return oldItem.id == newItem.id
         }
 
@@ -24,7 +24,7 @@ class ImageGridAdapter(private val onClickListener: OnClickListener ) :
 
     class CatViewHolder(private var binding: GridItemCatBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(cat: PagedCat) {
+        fun bind(cat: Cat) {
             binding.cat = cat
             binding.executePendingBindings()
         }
@@ -37,15 +37,15 @@ class ImageGridAdapter(private val onClickListener: OnClickListener ) :
 
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
-        val marsProperty = getItem(position)
+        val cat = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(marsProperty)
+            onClickListener.onClick(cat)
         }
-        holder.bind(marsProperty)
+        holder.bind(cat)
     }
 
 
-    class OnClickListener(val clickListener: (cat:PagedCat) -> Unit) {
-        fun onClick(pagedCat:PagedCat) = clickListener(pagedCat)
+    class OnClickListener(val clickListener: (cat: Cat) -> Unit) {
+        fun onClick(pagedCat: Cat) = clickListener(pagedCat)
     }
 }

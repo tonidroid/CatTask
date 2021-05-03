@@ -1,13 +1,18 @@
 package com.example.catimages.repositories
 
-import com.example.catimages.models.PagedCat
+import com.example.catimages.models.Cat
 import com.example.catimages.network.CatApi
 
 
 class CatRepositoryImpl : CatRepository {
 
-    override suspend fun getPagedCats(order: String, limit: Int, page: Int): List<PagedCat> {
+    //I use stock order 'asc'
+    override suspend fun getNetworkCats(order: String, limit: Int, page: Int): List<Cat> {
         return CatApi.retrofitService.getPagedCats(
             "asc",limit, page)
+    }
+
+    override suspend fun getLocalCats(): List<Cat> {
+        TODO("Not yet implemented")
     }
 }

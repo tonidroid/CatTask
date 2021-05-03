@@ -5,46 +5,38 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.catimages.models.PagedCat
+import com.example.catimages.models.Cat
 import com.example.catimages.models.ResponseStatus
-import com.example.catimages.network.CatApi
 import com.example.catimages.repositories.CatRepositoryImpl
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ImagesViewModel : ViewModel() {
 
     private val catRepo: CatRepositoryImpl = CatRepositoryImpl()
 
     private val _status = MutableLiveData<ResponseStatus>()
-
     val status: LiveData<ResponseStatus>
         get() = _status
 
-    private val _cat = MutableLiveData<List<PagedCat>>()
-    val catList: LiveData<List<PagedCat>>
+    private val _cat = MutableLiveData<List<Cat>>()
+    val catList: LiveData<List<Cat>>
         get() = _cat
 
-//    init {
-//        getPagedCats(9,1)
-//    }
+
+    init {
+        getPagedCats(3,0)
+    }
 
     fun getPagedCats(limit: Int, page: Int) {
         viewModelScope.launch {
             _status.value = ResponseStatus.LOADING
             try {
-                withContext(Dispatchers.Main){
-                    _cat.value = catRepo.getPagedCats("asc",limit, page)
+                    _cat.value = catRepo.getNetworkCats("asc",limit, page)
                     _status.value = ResponseStatus.DONE
-                }
             } catch (e: Exception) {
-                withContext(Dispatchers.Main){
-
                     Log.d("ALLLL", "${e.message} ${e.localizedMessage}")
                     _status.value = ResponseStatus.ERROR
                     _cat.value = ArrayList()
-                }
             }
         }
     }
