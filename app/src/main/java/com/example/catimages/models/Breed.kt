@@ -22,7 +22,7 @@ data class Breed (
     val health_issues : Int,
     val hypoallergenic : Int,
     val id : String,
-    val image : Image? = null,
+//    val image : Image? = null,
     val indoor : Int,
     val intelligence : Int,
     val life_span : String,
@@ -41,20 +41,20 @@ data class Breed (
     @IgnoredOnParcel
     val vetstreet_url : String,
     val vocalisation : Int,
-    val weight : Weight,
+//    val weight : Weight,
     val wikipedia_url : String
 ) : Parcelable
 
-@Parcelize
-data class Image (
-    val height : Int,
-    val id : String,
-    val url : String,
-    val width : Int
-) : Parcelable
-
-@Parcelize
-data class Weight (
-    val imperial : String,
-    val metric : String
-) : Parcelable
+//@Parcelize
+//data class Image (
+//    val height : Int,
+//    val id : String,
+//    val url : String,
+//    val width : Int
+//) : Parcelable
+//
+//@Parcelize
+//data class Weight (
+//    val imperial : String,
+//    val metric : String
+//) : Parcelable

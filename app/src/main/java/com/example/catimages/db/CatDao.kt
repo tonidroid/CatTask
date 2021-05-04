@@ -8,18 +8,21 @@ import com.example.catimages.models.Cat
 interface CatDao {
 
     @Query("SELECT * from cats")
-    fun getAll(): List<Cat>
+    suspend fun getAll(): List<Cat>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(cat: Cat)
+    suspend fun insert(cat: Cat)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(cats: List<Cat>?)
+    suspend fun insert(cats: List<Cat>?)
 
     @Update //use for updateReport
-    fun update(cat: Cat)
+    suspend fun update(cat: Cat)
 
     @Query("DELETE from cats")
-    fun deleteAll()
+    suspend fun deleteAll()
+
+    @Query("DELETE from cats where id = :id")
+    suspend fun deleteById(id: String)
 
 }

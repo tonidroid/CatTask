@@ -5,12 +5,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
+import com.example.catimages.db.CatDao
 import com.example.catimages.models.Cat
 import com.example.catimages.models.ResponseStatus
-import com.example.catimages.repositories.CatRepositoryImpl
+import com.example.catimages.repositories.CatNetworkRepositoryImpl
 import kotlinx.coroutines.*
 
-class CatDataSource (repository: CatRepositoryImpl, corScope: CoroutineScope)
+class CatDataSource (repository: CatNetworkRepositoryImpl, private val catDao: CatDao, corScope: CoroutineScope)
     : PageKeyedDataSource<Int, Cat>() {
 
     private var supervisorJob = SupervisorJob()
@@ -23,6 +24,7 @@ class CatDataSource (repository: CatRepositoryImpl, corScope: CoroutineScope)
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Cat>) {
         executeQuery(1, params.requestedLoadSize) {
+
             callback.onResult(it, null, 2)
         }
     }
@@ -47,9 +49,10 @@ class CatDataSource (repository: CatRepositoryImpl, corScope: CoroutineScope)
     private fun executeQuery(page: Int, perPage: Int, callback:(List<Cat>) -> Unit) {
         responseState.postValue(ResponseStatus.LOADING)
         scope.launch(getJobErrorHandler() + supervisorJob) {
-            val users = repo.getNetworkCats("asc", perPage, page)
+            val cats = repo.getNetworkCats("asc", perPage, page)
+            catDao.insert(cats)
             responseState.postValue(ResponseStatus.DONE)
-            callback(users)
+            callback(cats)
         }
     }
 

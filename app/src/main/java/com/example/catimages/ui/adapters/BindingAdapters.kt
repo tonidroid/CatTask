@@ -15,8 +15,8 @@ import com.example.catimages.models.ResponseStatus
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Cat>?) {
-    val adapter = recyclerView.adapter as ImageGridAdapter
-    adapter.submitList(data as PagedList<Cat>?)
+    val adapter = recyclerView.adapter as StoredCatesAdapter
+    adapter.submitList(data)
 }
 
 
